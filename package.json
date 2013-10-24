@@ -1,0 +1,13 @@
+{
+	"name": "FanChartJS",
+	"description": "A Javascript Library to create Fan Charts",
+	"version": "0.0.1",
+	"private": true,
+	"dependencies": {
+	},
+	"devDependencies": {
+		"mocha": "~1.8.1",
+		"grunt": "~0.4.1",
+		"grunt-mocha-test": "~0.2.2"
+	}
+}
