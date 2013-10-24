@@ -1,3 +1,11 @@
+var util = require('./lib/util');
+
+var createPoint function(degrees, radius) {
+	return { 
+		'x': Math.sin(util.toRadians(degrees)) * radius,
+		'y': Math.cos(util.toRadians(degrees)) * radius
+	};
+};
 
 var wrap = function(start, end) {
 	return {
@@ -9,7 +17,16 @@ var wrap = function(start, end) {
 				wrap(start, start + length),
 				wrap(start + length, end)
 			];
-		}
+		},
+		startPoint: function(radius) {
+			return createPoint(start, radius);
+		},
+		endPoint: function(radius) {
+			return createPoint(end, radius);
+		},
+		isLarge: function() {
+			return end - start > 180;
+		} 
 	};
 };
 

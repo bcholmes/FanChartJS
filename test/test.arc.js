@@ -17,4 +17,9 @@ describe('validate arc',function(){
     	var level3 = level2[0].bisect();
     	assert.equal(22.5, level3[0].end);
 	});
+	
+    it('should create start point',function() {
+    	var arc1 = arc.arc(-45, 0);
+    	assert.equal(-100, arc1.startPoint(100 * Math.sqrt(2)).x);
+    });
 });
