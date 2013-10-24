@@ -7,8 +7,21 @@ var textBox = function(node, centre) {
 		node.displayName() + '</text>';
 }
 
+var translate = function(start, translation) {
+	return {
+		'x': (start.x + translation.x),
+		'y': (start.y + translation.y)
+	};
+}
+
+var renderPoint = function(point) {
+	return '' + point.x + ' ' + point.y;
+}
+
 var drawArc = function(arc, node, centre) {
-	return "";
+	return '<path d="M ' + renderPoint(translate(arc.startPoint(100), centre))
+		+ ' A 100 100 0 ' +  (arc.isLarge() ? '1' : '0') + ' 0 ' + renderPoint(translate(arc.endPoint(100), centre))
+		+ '" fill="none" stroke="black" stroke-width="1" />';
 }
 
 exports.writeChart = function(fileName, tree) {
