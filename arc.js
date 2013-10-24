@@ -2,8 +2,8 @@ var util = require('./lib/util');
 
 var createPoint = function(degrees, radius) {
 	return { 
-		'x': Math.sin(util.toRadians(degrees)) * radius,
-		'y': Math.cos(util.toRadians(degrees)) * radius
+		'x': Math.sin(util.toRadians(degrees - 180)) * radius,
+		'y': Math.cos(util.toRadians(degrees - 180)) * radius
 	};
 };
 

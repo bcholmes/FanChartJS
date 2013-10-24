@@ -21,7 +21,7 @@ var renderPoint = function(point) {
 var drawArc = function(arc, node, centre) {
 	return '<path d="M ' + renderPoint(translate(arc.startPoint(100), centre))
 		+ ' A 100 100 0 ' +  (arc.isLarge() ? '1' : '0') + ' 0 ' + renderPoint(translate(arc.endPoint(100), centre))
-		+ '" fill="none" stroke="black" stroke-width="1" />';
+		+ '" fill="none" stroke="#aaaaaa" stroke-width="6" />';
 }
 
 exports.writeChart = function(fileName, tree) {
