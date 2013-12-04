@@ -11,7 +11,7 @@ var wrap = function(node, data) {
 			if (node.parents.length > i && i >= 0) {
 				return wrap(node.parents[i],data);
 			} else {
-				return nil;
+				return null;
 			}
 		},
 		displayName: function() {

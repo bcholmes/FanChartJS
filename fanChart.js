@@ -18,9 +18,12 @@ var renderPoint = function(point) {
 	return '' + point.x + ' ' + point.y;
 }
 
-var drawArc = function(arc, node, centre) {
-	return '<path d="M ' + renderPoint(translate(arc.startPoint(100), centre))
-		+ ' A 100 100 0 ' +  (arc.isLarge() ? '1' : '0') + ' 0 ' + renderPoint(translate(arc.endPoint(100), centre))
+var drawArc = function(arc, node, centre, level) {
+	var radius = 100 + (50 * level);
+
+	return '<path d="M ' + renderPoint(translate(arc.startPoint(radius), centre))
+		+ ' A ' + radius + ' ' + radius + ' 0 ' +  (arc.isLarge() ? '1' : '0') 
+		+ ' 0 ' + renderPoint(translate(arc.endPoint(radius), centre))
 		+ '" fill="none" stroke="#aaaaaa" stroke-width="6" />';
 }
 
@@ -32,8 +35,17 @@ exports.writeChart = function(fileName, tree) {
 	stream.once('open', function(fd) {
 		stream.write('<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n');
 		stream.write('<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" viewBox = "0 0 500 600" version = "1.1">\n');
-		stream.write('\t' + drawArc(arc, 0, centre) + '\n');
+		stream.write('\t' + drawArc(arc, 0, centre, 0) + '\n');
 		stream.write('\t' + textBox(tree, centre) + '\n');
+		
+		var subArcs = arc.bisect();
+		for (var i = 0; i < 2; i++) {
+			var node = tree.parent(i);
+			if (node != null) {
+				stream.write('\t' + drawArc(subArcs[i], 0, centre, 1) + '\n');
+			}
+		}
+		
 		stream.write('</svg>');
 		stream.end();
 	});
