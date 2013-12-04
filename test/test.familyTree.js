@@ -8,6 +8,7 @@ describe('validate parents',function(){
     	
     	assert.equal('Bruno Schmidt', trunk.displayName());
 	});
+	
     it('should display default display name',function() {
     	var trunk = treeFactory.familyTree({  });
     	
@@ -23,5 +24,13 @@ describe('validate parents',function(){
     	parent = trunk.parent(0);
     	
     	assert.equal('Leopold Schmidt', parent.displayName());
+	});
+
+    it('should calculate level',function() {
+    	var trunk = treeFactory.familyTree({ 'name': 'Bruno Schmidt' });
+    	var parent = trunk.addParent({'name': 'Leopold Schmidt' });
+    	
+    	assert.equal('Leopold Schmidt', parent.displayName());
+    	assert.equal(1, parent.level());
 	});
 });

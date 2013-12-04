@@ -4,12 +4,20 @@ var wrap = function(node, data) {
 	return {
 		addParent: function(parent) {
 			var result = createNode(parent);
+			result.child = node;
 			node.parents.push(result);
-			return wrap(result);
+			return wrap(result, data);
+		},
+		level: function() {
+			if (node.child == null) {
+				return 0;
+			} else {
+				return wrap(node.child, data).level() + 1;
+			}
 		},
 		parent: function(i) {
 			if (node.parents.length > i && i >= 0) {
-				return wrap(node.parents[i],data);
+				return wrap(node.parents[i], data);
 			} else {
 				return null;
 			}
